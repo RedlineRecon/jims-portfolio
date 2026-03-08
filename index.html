@@ -1301,7 +1301,8 @@
           </div>
           <div class="contact-card reveal">
             <strong>Quick contact form (for your website)</strong>
-            <form name="contact" method="POST" netlify>
+            <form name="contact" method="POST" data-netlify="true">
+              <input type="hidden" name="form-name" value="contact" />
               <label>
                 Name
                 <input type="text" name="name" placeholder="Client name" />
@@ -1362,5 +1363,6 @@
   </script>
 </body>
 </html>
+
 
 
