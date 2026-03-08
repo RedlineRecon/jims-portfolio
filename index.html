@@ -1,0 +1,1369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Amazon Product Sourcing VA Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f5f7ff;
+      --bg-alt: #ffffff;
+      --primary: #3b82f6;   /* bright tech blue */
+      --accent: #22c55e;    /* fresh green */
+      --accent-soft: #a5b4fc;
+      --text-main: #0f172a;
+      --text-soft: #6b7280;
+      --border-subtle: #e5e7eb;
+      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.08);
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --radius-pill: 999px;
+      --transition-fast: 220ms ease;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top left, #e0f2fe 0, #f5f7ff 36%, #eef2ff 100%);
+      color: var(--text-main);
+      line-height: 1.6;
+      scroll-behavior: smooth;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Layout */
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .container {
+      width: min(1120px, 100%);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Navbar */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(16px);
+      background: linear-gradient(
+        90deg,
+        rgba(245, 247, 255, 0.96),
+        rgba(239, 246, 255, 0.96)
+      );
+      border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.7rem 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+    }
+
+    .brand-logo {
+      width: 36px;
+      height: 36px;
+      border-radius: 40%;
+      background: conic-gradient(from 160deg, #0ea5e9, #3b82f6, #a855f7, #22c55e, #0ea5e9);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .brand-logo::after {
+      content: "";
+      position: absolute;
+      inset: 20%;
+      border-radius: inherit;
+      background: radial-gradient(circle at 20% 0, rgba(255, 255, 255, 0.85), transparent 62%);
+      mix-blend-mode: screen;
+    }
+
+    .brand-text {
+      font-weight: 600;
+      font-size: 1rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #0f172a;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+      font-size: 0.9rem;
+    }
+
+    .nav-links a {
+      position: relative;
+      color: var(--text-soft);
+      padding-bottom: 2px;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -2px;
+      width: 0;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      transition: width var(--transition-fast);
+    }
+
+    .nav-links a:hover {
+      color: var(--text-main);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      padding: 0.45rem 1rem;
+      border-radius: var(--radius-pill);
+      background: linear-gradient(135deg, var(--primary), #0ea5e9);
+      color: #ffffff;
+      font-size: 0.85rem;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      box-shadow: 0 12px 30px rgba(59, 130, 246, 0.35);
+      border: none;
+      cursor: pointer;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), filter var(--transition-fast);
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.03);
+      box-shadow: 0 18px 40px rgba(59, 130, 246, 0.4);
+    }
+
+    /* Hero */
+    .hero {
+      padding: 3.5rem 0 2.5rem;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      gap: 2.75rem;
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(191, 219, 254, 0.7);
+      border-radius: var(--radius-pill);
+      padding: 0.25rem 0.9rem;
+      font-size: 0.78rem;
+      color: #1d4ed8;
+      border: 1px solid rgba(129, 140, 248, 0.5);
+      backdrop-filter: blur(14px);
+    }
+
+    .badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: radial-gradient(circle, #22c55e, #15803d);
+      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.25);
+    }
+
+    .hero-title {
+      font-size: clamp(2.2rem, 3.1vw, 2.9rem);
+      line-height: 1.1;
+      margin-top: 1rem;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.04em;
+    }
+
+    .hero-title span {
+      background: linear-gradient(120deg, #2563eb, #0ea5e9, #22c55e);
+      -webkit-background-clip: text;
+      color: transparent;
+      display: inline-block;
+    }
+
+    .hero-subtitle {
+      font-size: 0.98rem;
+      color: var(--text-soft);
+      max-width: 32rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .hero-subtitle strong {
+      font-weight: 600;
+      color: #0f172a;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+      margin-bottom: 1.8rem;
+    }
+
+    .btn-primary {
+      padding: 0.85rem 1.6rem;
+      border-radius: var(--radius-pill);
+      background: linear-gradient(135deg, #2563eb, #0ea5e9);
+      color: #ffffff;
+      font-weight: 500;
+      font-size: 0.95rem;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      box-shadow: 0 18px 45px rgba(37, 99, 235, 0.45);
+      cursor: pointer;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), filter var(--transition-fast);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.05);
+      box-shadow: 0 24px 60px rgba(37, 99, 235, 0.55);
+    }
+
+    .btn-ghost {
+      padding: 0.8rem 1.3rem;
+      border-radius: var(--radius-pill);
+      border: 1px dashed rgba(148, 163, 184, 0.9);
+      font-size: 0.9rem;
+      color: var(--text-soft);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(12px);
+      cursor: pointer;
+      transition: border var(--transition-fast), background var(--transition-fast), transform var(--transition-fast);
+    }
+
+    .btn-ghost:hover {
+      border-style: solid;
+      border-color: #4f46e5;
+      background: #eef2ff;
+      transform: translateY(-1px);
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.4rem;
+      font-size: 0.82rem;
+      color: var(--text-soft);
+    }
+
+    .meta-pill {
+      padding: 0.5rem 0.95rem;
+      border-radius: var(--radius-pill);
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .meta-pill strong {
+      font-size: 1rem;
+      color: #0f172a;
+    }
+
+    /* Hero Right - Photo & quick stats */
+    .hero-panel {
+      background: radial-gradient(circle at top, #dbeafe, #eff6ff 50%, #fdf2ff 100%);
+      border-radius: 32px;
+      padding: 1.6rem 1.6rem 1.2rem;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-panel::before {
+      content: "";
+      position: absolute;
+      inset: -20%;
+      background: radial-gradient(circle at top left, rgba(59, 130, 246, 0.16), transparent 60%);
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    .hero-panel-inner {
+      position: relative;
+      display: grid;
+      gap: 1.3rem;
+    }
+
+    .photo-placeholder {
+      border-radius: 26px;
+      border: 1.5px dashed rgba(129, 140, 248, 0.9);
+      background: linear-gradient(135deg, rgba(191, 219, 254, 0.7), rgba(221, 214, 254, 0.8));
+      min-height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      color: #1d4ed8;
+      font-weight: 500;
+    }
+
+    .photo-placeholder span {
+      opacity: 0.9;
+    }
+
+    .panel-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      font-size: 0.78rem;
+    }
+
+    .panel-pill {
+      border-radius: var(--radius-pill);
+      padding: 0.35rem 0.75rem;
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .panel-pill-icon {
+      width: 16px;
+      height: 16px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #ecfdf5;
+      font-size: 0.7rem;
+    }
+
+    .panel-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.7rem;
+      margin-top: 0.4rem;
+    }
+
+    .metric-card {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 16px;
+      padding: 0.6rem 0.75rem;
+      border: 1px solid rgba(148, 163, 184, 0.24);
+      font-size: 0.75rem;
+      color: var(--text-soft);
+    }
+
+    .metric-card strong {
+      display: block;
+      font-size: 1.05rem;
+      color: #0f172a;
+    }
+
+    .metric-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: #64748b;
+    }
+
+    /* Sections general */
+    section {
+      padding: 2.75rem 0 1.25rem;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 1rem;
+      margin-bottom: 1.6rem;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    .section-kicker {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: #6366f1;
+      margin-bottom: 0.3rem;
+    }
+
+    .section-intro {
+      font-size: 0.9rem;
+      color: var(--text-soft);
+      max-width: 30rem;
+    }
+
+    /* About */
+    .about-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 2.3rem;
+      align-items: start;
+    }
+
+    .about-main {
+      background: var(--bg-alt);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem 1.6rem;
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .about-main p {
+      font-size: 0.92rem;
+      color: var(--text-soft);
+      margin-bottom: 0.7rem;
+    }
+
+    .about-main ul {
+      list-style: none;
+      margin-top: 0.6rem;
+      display: grid;
+      gap: 0.4rem;
+      font-size: 0.9rem;
+      color: var(--text-soft);
+    }
+
+    .about-main li::before {
+      content: "• ";
+      color: #2563eb;
+      font-weight: 700;
+    }
+
+    .about-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.8rem;
+      font-size: 0.8rem;
+    }
+
+    .tag {
+      padding: 0.25rem 0.7rem;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(129, 140, 248, 0.5);
+      background: #eef2ff;
+      color: #4338ca;
+    }
+
+    .about-side {
+      display: grid;
+      gap: 0.9rem;
+    }
+
+    .side-card {
+      background: radial-gradient(circle at top left, #dbeafe, #ffffff);
+      border-radius: var(--radius-lg);
+      padding: 1rem 1.1rem;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      font-size: 0.85rem;
+      color: var(--text-soft);
+    }
+
+    .side-card strong {
+      display: block;
+      margin-bottom: 0.3rem;
+      color: #1f2937;
+    }
+
+    /* Services */
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.3rem;
+    }
+
+    .service-card {
+      background: var(--bg-alt);
+      border-radius: var(--radius-md);
+      padding: 1.1rem 1.1rem 1rem;
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      box-shadow: 0 14px 30px rgba(15, 23, 42, 0.06);
+      position: relative;
+      overflow: hidden;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+    }
+
+    .service-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.12), transparent 40%);
+      opacity: 0;
+      transition: opacity var(--transition-fast);
+      pointer-events: none;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 22px 50px rgba(15, 23, 42, 0.12);
+      border-color: rgba(59, 130, 246, 0.6);
+    }
+
+    .service-card:hover::after {
+      opacity: 1;
+    }
+
+    .service-label {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #64748b;
+      margin-bottom: 0.2rem;
+    }
+
+    .service-title {
+      font-size: 1rem;
+      margin-bottom: 0.3rem;
+      color: #111827;
+    }
+
+    .service-card p {
+      font-size: 0.87rem;
+      color: var(--text-soft);
+      margin-bottom: 0.45rem;
+    }
+
+    .service-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      font-size: 0.78rem;
+    }
+
+    .service-pill {
+      padding: 0.18rem 0.55rem;
+      border-radius: var(--radius-pill);
+      background: #eff6ff;
+      color: #1d4ed8;
+      border: 1px solid rgba(129, 140, 248, 0.6);
+    }
+
+    /* Process */
+    .timeline {
+      display: grid;
+      gap: 0.9rem;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      gap: 0.9rem;
+      align-items: start;
+    }
+
+    .step-badge {
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      background: #eff6ff;
+      border: 1px solid rgba(129, 140, 248, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      color: #3730a3;
+      font-weight: 600;
+    }
+
+    .step-body h4 {
+      font-size: 0.95rem;
+      margin-bottom: 0.1rem;
+      color: #111827;
+    }
+
+    .step-body p {
+      font-size: 0.86rem;
+      color: var(--text-soft);
+    }
+
+    /* Case studies */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.2rem;
+    }
+
+    .case-card {
+      background: var(--bg-alt);
+      border-radius: var(--radius-md);
+      padding: 1.1rem 1.1rem 1rem;
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      box-shadow: 0 16px 35px rgba(15, 23, 42, 0.08);
+      font-size: 0.87rem;
+      color: var(--text-soft);
+    }
+
+    .case-tag {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #0f766e;
+      margin-bottom: 0.35rem;
+    }
+
+    .case-title {
+      font-size: 0.98rem;
+      margin-bottom: 0.35rem;
+      color: #022c22;
+    }
+
+    .case-metrics {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+      font-size: 0.78rem;
+    }
+
+    .case-pill {
+      padding: 0.2rem 0.5rem;
+      border-radius: var(--radius-pill);
+      background: #ecfeff;
+      color: #0f766e;
+      border: 1px solid #99f6e4;
+    }
+
+    /* Tools */
+    .tools-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .tool-pill {
+      padding: 0.35rem 0.75rem;
+      border-radius: var(--radius-pill);
+      background: #eef2ff;
+      border: 1px solid rgba(129, 140, 248, 0.7);
+      font-size: 0.82rem;
+      color: #1d4ed8;
+    }
+
+    /* Metrics / quick stats */
+    .metrics-band {
+      margin-top: 1rem;
+      border-radius: var(--radius-lg);
+      padding: 0.9rem 1rem;
+      background: linear-gradient(90deg, rgba(59, 130, 246, 0.12), rgba(37, 99, 235, 0.02));
+      border: 1px solid rgba(59, 130, 246, 0.35);
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.7rem;
+      font-size: 0.8rem;
+      color: var(--text-soft);
+    }
+
+    .metrics-band strong {
+      display: block;
+      font-size: 1.05rem;
+      color: #111827;
+    }
+
+    /* FAQ */
+    .faq-list {
+      display: grid;
+      gap: 0.75rem;
+      font-size: 0.87rem;
+      color: var(--text-soft);
+    }
+
+    .faq-item {
+      background: var(--bg-alt);
+      border-radius: 16px;
+      padding: 0.9rem 1rem;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+    }
+
+    .faq-item summary {
+      cursor: pointer;
+      list-style: none;
+      font-weight: 500;
+      color: #111827;
+    }
+
+    .faq-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-item p {
+      margin-top: 0.4rem;
+    }
+
+    /* Contact */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .contact-card {
+      background: var(--bg-alt);
+      border-radius: var(--radius-lg);
+      padding: 1.3rem 1.4rem;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      box-shadow: var(--shadow-soft);
+      font-size: 0.9rem;
+      color: var(--text-soft);
+    }
+
+    .contact-card strong {
+      display: block;
+      margin-bottom: 0.4rem;
+      color: #111827;
+    }
+
+    .contact-list {
+      list-style: none;
+      margin-top: 0.4rem;
+      display: grid;
+      gap: 0.35rem;
+      font-size: 0.88rem;
+    }
+
+    .contact-list span.label {
+      font-weight: 500;
+      color: #1e3a8a;
+    }
+
+    form {
+      display: grid;
+      gap: 0.7rem;
+      font-size: 0.88rem;
+    }
+
+    label {
+      display: grid;
+      gap: 0.3rem;
+    }
+
+    input,
+    textarea {
+      border-radius: 12px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      padding: 0.6rem 0.7rem;
+      font-family: inherit;
+      font-size: 0.9rem;
+      outline: none;
+      background: #f9fafb;
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast), transform var(--transition-fast);
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: #2563eb;
+      background: #ffffff;
+      box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.4);
+      transform: translateY(-1px);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .form-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0.2rem;
+      font-size: 0.78rem;
+      color: var(--text-soft);
+      flex-wrap: wrap;
+    }
+
+    /* Footer */
+    footer {
+      padding: 1.8rem 0 2.4rem;
+      font-size: 0.8rem;
+      color: var(--text-soft);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      border-top: 1px solid rgba(148, 163, 184, 0.35);
+      padding-top: 1.2rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+    }
+
+    /* Scroll reveal animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 420ms ease, transform 420ms ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive */
+    @media (max-width: 960px) {
+      .hero-grid,
+      .about-grid,
+      .contact-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .hero {
+        padding-top: 2.4rem;
+      }
+
+      .hero-panel {
+        order: -1;
+      }
+    }
+
+    @media (max-width: 800px) {
+      .nav-inner {
+        gap: 0.8rem;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .metrics-band {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .grid-3 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .grid-3,
+      .grid-2 {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .metrics-band {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .hero-title {
+        font-size: 2rem;
+      }
+
+      .hero-panel {
+        padding: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <!-- NAVBAR -->
+    <nav class="nav">
+      <div class="container nav-inner">
+        <div class="brand">
+          <div class="brand-logo"></div>
+          <div class="brand-text">Amazon Sourcing VA</div>
+        </div>
+        <div class="nav-links">
+          <a href="#about">About</a>
+          <a href="#services">Services</a>
+          <a href="#process">Process</a>
+          <a href="#cases">Case Studies</a>
+          <a href="#tools">Tools</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+          Book a discovery call →
+        </button>
+      </div>
+    </nav>
+
+    <!-- HERO -->
+    <header class="hero">
+      <div class="container hero-grid">
+        <div class="hero-left reveal visible">
+          <div class="badge">
+            <span class="badge-dot"></span>
+            <span>Amazon FBA / Wholesale Product Sourcing VA</span>
+          </div>
+          <h1 class="hero-title">
+            Hi, I’m <span>YOUR NAME</span><br />
+            Your data-driven Amazon Sourcing Partner.
+          </h1>
+          <p class="hero-subtitle">
+            I help Amazon sellers consistently find <strong>profitable, low-risk products</strong> by combining real data (Keepa, SellerAmp, Helium 10) with hands-on supplier communication and margin-focused sourcing decisions.
+          </p>
+          <div class="hero-actions">
+            <button class="btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+              Let’s talk sourcing →
+            </button>
+            <button class="btn-ghost" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">
+              View sourcing services
+            </button>
+          </div>
+          <div class="hero-meta">
+            <div class="meta-pill">
+              <strong>3+ yrs</strong>
+              <span>Amazon VA & product sourcing experience</span>
+            </div>
+            <div class="meta-pill">
+              <strong>500+ SKUs</strong>
+              <span>analyzed for ROI, sales rank & competition</span>
+            </div>
+            <div class="meta-pill">
+              <strong>FBA & FBM</strong>
+              <span>wholesale, OA & small-brand sourcing</span>
+            </div>
+          </div>
+        </div>
+
+        <aside class="hero-panel reveal">
+          <div class="hero-panel-inner">
+            <div class="photo-placeholder">
+              <span>Place your professional photo here.<br />Replace this box with an &lt;img&gt; tag (e.g. headshot for your portfolio).</span>
+            </div>
+            <div class="panel-badges">
+              <div class="panel-pill">
+                <span class="panel-pill-icon">✓</span>
+                <span>Keepa • SellerAmp • Helium 10 • Jungle Scout</span>
+              </div>
+              <div class="panel-pill">
+                <span class="panel-pill-icon">✓</span>
+                <span>US, UK & EU marketplaces</span>
+              </div>
+            </div>
+            <div class="panel-metrics">
+              <div class="metric-card">
+                <span class="metric-label">Avg. target ROI</span>
+                <strong>30–60%</strong>
+                <span>based on client strategy</span>
+              </div>
+              <div class="metric-card">
+                <span class="metric-label">Monthly scans</span>
+                <strong>1000+</strong>
+                <span>products evaluated</span>
+              </div>
+              <div class="metric-card">
+                <span class="metric-label">Focus</span>
+                <strong>Data-first</strong>
+                <span>risk-aware sourcing</span>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </header>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="container">
+        <div class="section-header reveal">
+          <div>
+            <div class="section-kicker">About me</div>
+            <h2 class="section-title">Amazon product sourcing VA with real marketplace experience</h2>
+          </div>
+          <p class="section-intro">
+            I specialize in finding profitable, compliant products for Amazon FBA and FBM, focusing on sustainable margins, realistic sales estimates, and clean account health.
+          </p>
+        </div>
+        <div class="about-grid">
+          <article class="about-main reveal">
+            <p>
+              Over the last few years, I have worked as an Amazon Virtual Assistant focused on <strong>product research and sourcing</strong> for wholesale and online arbitrage sellers. I combine sales rank history, price trends, and competition analysis to filter out risky products before they ever reach your inventory.
+            </p>
+            <p>
+              My workflow is built around data and clear criteria: sales velocity, buy box stability, minimum ROI/Net margin, brand & category restrictions, IP-risk signals, and logistics constraints. This ensures your capital goes into SKUs that match your goals instead of guesswork.
+            </p>
+            <ul>
+              <li>Amazon wholesale & OA product research and sourcing (US / UK / EU).</li>
+              <li>Supplier outreach, quote comparison, and basic negotiation support.</li>
+              <li>Profitability calculators, fee estimates, and break-even analysis.</li>
+              <li>Replenishment suggestions based on velocity and lead times.</li>
+            </ul>
+            <div class="about-tags">
+              <span class="tag">Wholesale</span>
+              <span class="tag">Online Arbitrage</span>
+              <span class="tag">Keepa Mastery</span>
+              <span class="tag">FBA & FBM</span>
+              <span class="tag">Catalog Management</span>
+            </div>
+          </article>
+          <div class="about-side">
+            <div class="side-card reveal">
+              <strong>Ideal clients I work with</strong>
+              <p>Amazon sellers who want a reliable sourcing partner to handle repetitive research, send you pre-vetted leads, and help maintain a predictable pipeline of profitable products.</p>
+            </div>
+            <div class="side-card reveal">
+              <strong>How I usually plug into your business</strong>
+              <p>We define clear buying criteria (ROI, budget, categories, marketplaces), align on tools and workflows, then I deliver qualified leads and actionable sourcing reports on a consistent schedule.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services">
+      <div class="container">
+        <div class="section-header reveal">
+          <div>
+            <div class="section-kicker">Services</div>
+            <h2 class="section-title">What I can own for you</h2>
+          </div>
+          <p class="section-intro">
+            I can handle full-cycle product sourcing or plug into specific parts of your workflow, from research only to supplier communication and replenishment planning.
+          </p>
+        </div>
+        <div class="grid-3">
+          <article class="service-card reveal">
+            <div class="service-label">Core service</div>
+            <h3 class="service-title">Amazon product research & sourcing</h3>
+            <p>
+              Deep research using Keepa, SellerAmp, Helium 10, and Jungle Scout to identify profitable products that meet your ROI, sales rank, and competition rules.
+            </p>
+            <div class="service-meta">
+              <span class="service-pill">Keepa charts</span>
+              <span class="service-pill">ROI / margin filters</span>
+              <span class="service-pill">Sales rank rules</span>
+            </div>
+          </article>
+
+          <article class="service-card reveal">
+            <div class="service-label">Suppliers</div>
+            <h3 class="service-title">Supplier & brand communication</h3>
+            <p>
+              Finding suppliers, requesting price lists, cleaning data, and shortlisting SKUs that fit your strategy, with clear documentation you can make decisions from.
+            </p>
+            <div class="service-meta">
+              <span class="service-pill">Email outreach</span>
+              <span class="service-pill">Price list analysis</span>
+              <span class="service-pill">MOQ & terms</span>
+            </div>
+          </article>
+
+          <article class="service-card reveal">
+            <div class="service-label">Numbers</div>
+            <h3 class="service-title">Profitability & inventory support</h3>
+            <p>
+              Calculating landed costs, Amazon fees, and net profit; preparing sourcing sheets; and suggesting realistic reorder quantities based on sales history.
+            </p>
+            <div class="service-meta">
+              <span class="service-pill">Fee estimates</span>
+              <span class="service-pill">Replenishment cues</span>
+              <span class="service-pill">FBA / FBM scenarios</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section id="process">
+      <div class="container">
+        <div class="section-header reveal">
+          <div>
+            <div class="section-kicker">Workflow</div>
+            <h2 class="section-title">My sourcing process from idea to PO-ready</h2>
+          </div>
+          <p class="section-intro">
+            A transparent, repeatable process so you always know how I reach each sourcing recommendation.
+          </p>
+        </div>
+        <div class="timeline reveal">
+          <div class="step">
+            <div class="step-badge">1</div>
+            <div class="step-body">
+              <h4>Define buy box and criteria</h4>
+              <p>We align on target ROI, net profit, price ranges, categories, marketplaces, and risk tolerance (competition, brand risk, seasonality).</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-badge">2</div>
+            <div class="step-body">
+              <h4>Data-driven product research</h4>
+              <p>I scan catalogs, storefronts, and supplier price lists using tools like Keepa and SellerAmp to shortlist SKUs with healthy sales rank and pricing history.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-badge">3</div>
+            <div class="step-body">
+              <h4>Supplier contact & quotes</h4>
+              <p>I reach out to suppliers (or work from your existing list), request updated pricing, and compare quotes against our profitability requirements.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-badge">4</div>
+            <div class="step-body">
+              <h4>Profit & risk validation</h4>
+              <p>For each candidate SKU, I calculate fees, landed cost, net profit, and ROI, while checking for competition levels, stock history, and potential brand issues.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-badge">5</div>
+            <div class="step-body">
+              <h4>Actionable sourcing report</h4>
+              <p>You receive a clean spreadsheet or dashboard with buy/skip decisions, suggested order quantities, and notes for your final approval.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CASE STUDIES -->
+    <section id="cases">
+      <div class="container">
+        <div class="section-header reveal">
+          <div>
+            <div class="section-kicker">Case studies</div>
+            <h2 class="section-title">Sample sourcing wins from past work</h2>
+          </div>
+          <p class="section-intro">
+            Here are realistic examples of how my sourcing work has added value to Amazon businesses. Replace these with your own numbers and SKUs.
+          </p>
+        </div>
+        <div class="grid-2">
+          <article class="case-card reveal">
+            <div class="case-tag">Wholesale • FBA</div>
+            <h3 class="case-title">Rebuilding margins on a competitive grocery SKU</h3>
+            <p>
+              Used Keepa to identify periods of stable buy box and acceptable competition levels, then sourced from an alternative distributor with better pricing, raising expected net margin from 8% to 26%.
+            </p>
+            <div class="case-metrics">
+              <span class="case-pill">Avg. 26% net margin</span>
+              <span class="case-pill">Turnover ~25 days</span>
+              <span class="case-pill">Reduced price wars</span>
+            </div>
+          </article>
+          <article class="case-card reveal">
+            <div class="case-tag">Online arbitrage</div>
+            <h3 class="case-title">Building a steady pipeline of replenishable SKUs</h3>
+            <p>
+              Set up a repeatable sourcing process targeting mid-velocity products with stable buy box, finding 10+ replenishable items that matched client’s ROI and budget rules.
+            </p>
+            <div class="case-metrics">
+              <span class="case-pill">10+ replens added</span>
+              <span class="case-pill">Consistent 30–40% ROI</span>
+              <span class="case-pill">Time saved on research</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- TOOLS & METRICS -->
+    <section id="tools">
+      <div class="container">
+        <div class="section-header reveal">
+          <div>
+            <div class="section-kicker">Tools & numbers</div>
+            <h2 class="section-title">Tools I use & how I measure success</h2>
+          </div>
+          <p class="section-intro">
+            I adapt to your current stack but can also recommend tools for your business stage, budget, and marketplace focus.
+          </p>
+        </div>
+        <div class="tools-wrap reveal">
+          <span class="tool-pill">Keepa</span>
+          <span class="tool-pill">SellerAmp / SAS</span>
+          <span class="tool-pill">Helium 10</span>
+          <span class="tool-pill">Jungle Scout</span>
+          <span class="tool-pill">Amazon Seller Central</span>
+          <span class="tool-pill">Google Sheets / Excel</span>
+          <span class="tool-pill">Asana / Trello / ClickUp</span>
+          <span class="tool-pill">Gmail / Outlook</span>
+        </div>
+        <div class="metrics-band reveal">
+          <div>
+            <span class="metric-label">Core KPIs</span>
+            <strong>ROI & net profit</strong>
+            <span>I only recommend deals that meet your targets.</span>
+          </div>
+          <div>
+            <span class="metric-label">Product velocity</span>
+            <strong>Sales rank & drops</strong>
+            <span>Helps avoid dead inventory.</span>
+          </div>
+          <div>
+            <span class="metric-label">Risk checks</span>
+            <strong>Competition & brand</strong>
+            <span>Focus on sustainable offers.</span>
+          </div>
+          <div>
+            <span class="metric-label">Workflow</span>
+            <strong>Clear reporting</strong>
+            <span>Clean, filterable spreadsheets.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+      <div class="container">
+        <div class="section-header reveal">
+          <div>
+            <div class="section-kicker">FAQ</div>
+            <h2 class="section-title">Common questions from sellers</h2>
+          </div>
+          <p class="section-intro">
+            You can customize these answers to match how you prefer to work with clients and your pricing structure.
+          </p>
+        </div>
+        <div class="faq-list reveal">
+          <details class="faq-item" open>
+            <summary>Which marketplaces do you source for?</summary>
+            <p>I currently focus on US, UK, and EU Amazon marketplaces. If you work in other regions, I’m happy to discuss your categories and sourcing options.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Do you only do research, or can you also contact suppliers?</summary>
+            <p>I can do research-only (sending you leads) or manage supplier outreach, price list cleaning, and SKU shortlisting, depending on how hands-on you want me to be.</p>
+          </details>
+          <details class="faq-item">
+            <summary>How do you share your sourcing results?</summary>
+            <p>I typically use Google Sheets with filters for ROI, net profit, buy decision, and notes, but I can adapt to your preferred template or tool.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="container">
+        <div class="section-header reveal">
+          <div>
+            <div class="section-kicker">Contact</div>
+            <h2 class="section-title">Let’s talk about your next profitable SKUs</h2>
+          </div>
+          <p class="section-intro">
+            Tell me a bit about your Amazon business, categories, and budget, and I’ll reply with how I can support your product sourcing pipeline.
+          </p>
+        </div>
+        <div class="contact-grid">
+          <div class="contact-card reveal">
+            <strong>Your contact information (edit this block)</strong>
+            <ul class="contact-list">
+              <li><span class="label">Email:</span> yourname@email.com</li>
+              <li><span class="label">WhatsApp / Telegram:</span> +00 000 000 000</li>
+              <li><span class="label">Location:</span> City, Country (works with clients worldwide)</li>
+              <li><span class="label">Preferred time:</span> 15–30 min intro call via Zoom or Google Meet</li>
+            </ul>
+            <p style="margin-top:0.6rem;">
+              You can also link to your Upwork/OnlineJobs/portfolio profiles here if you want clients to verify your work history.
+            </p>
+          </div>
+          <div class="contact-card reveal">
+            <strong>Quick contact form (for your website)</strong>
+            <form>
+              <label>
+                Name
+                <input type="text" name="name" placeholder="Client name" />
+              </label>
+              <label>
+                Email
+                <input type="email" name="email" placeholder="Client email" />
+              </label>
+              <label>
+                What are you selling on Amazon?
+                <textarea name="message" placeholder="Tell me about your Amazon business, marketplaces, and categories."></textarea>
+              </label>
+              <div class="form-footer">
+                <button type="submit" class="btn-primary">
+                  Send message
+                </button>
+                <span>No spam — I’ll just reply about your sourcing needs.</span>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="container footer-inner">
+        <div>© <span id="year"></span> YOUR NAME – Amazon Product Sourcing Virtual Assistant</div>
+        <div class="footer-links">
+          <a href="#top">Back to top</a>
+          <a href="#services">Services</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Dynamic year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Scroll reveal
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.1,
+      }
+    );
+
+    document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+  </script>
+</body>
+</html>
